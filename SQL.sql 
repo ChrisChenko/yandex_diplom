@@ -1,0 +1,28 @@
+-- Кристина Суконченко, 18-я когорта — Финальный проект. Инженер по тестированию плюс
+
+-- Запрос 1
+
+select
+    "login",
+    count(o.id)
+from
+    "Couriers" as c
+    LEFT JOIN "Orders" as o on o."courierId" = c.id
+WHERE
+    o."inDelivery" = true
+GROUP BY
+    c.id;
+
+
+-- Запрос 2
+
+SELECT
+    track,
+    case
+        when finished = true then 2
+        when cancelled = true then -1
+        when "inDelivery" = true then 1
+        else 0
+    end as status
+FROM
+    "Orders";
